@@ -7,10 +7,6 @@ import Dashboard from "./components/Dashboard"
 import { token } from "./spotify"
 import { createContext, useContext } from "react";
 
-
-
-
-
 const App = () => {
   const [access_Token, setAccess_Token] = useState<string | null>()
 
@@ -27,7 +23,6 @@ const App = () => {
       {typeof access_Token ===  "string" ? <Dashboard /> : <Login />}
       {/* <Login/> */}
     </div>
-
   );
 }
 
