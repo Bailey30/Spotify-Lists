@@ -8,8 +8,6 @@
     "@testing-library/user-event": "^13.5.0",
     "@types/jest": "^27.4.1",
     "@types/node": "^17.0.21",
-    "@types/react": "^17.0.40",
-    "@types/react-dom": "^17.0.13",
     "axios": "^0.26.1",
     "dotenv": "^16.0.0",
     "greensock": "^1.20.2",
@@ -47,5 +45,9 @@
       "last 1 safari version"
     ],
     "proxy": "http://localhost:3001"
+  },
+  "devDependencies": {
+    "@types/react": "^17.0.40",
+    "@types/react-dom": "^17.0.13"
   }
 }
