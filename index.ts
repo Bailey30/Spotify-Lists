@@ -30,8 +30,13 @@ app.get('/', function (req, res) {
 
 // Priority serve any static files.
 
-const redirect_uri = process.env.redirect_uri || "http://localhost:3000/callback"
-const frontend_uri = process.env.frontend_uri || "http://localhost:3001"
+let redirect_uri = process.env.redirect_uri || "http://localhost:3000/callback"
+let frontend_uri = process.env.frontend_uri || "http://localhost:3001"
+if (process.env.NODE_ENV !== 'production') {
+    redirect_uri = 'http://localhost:3000/callback';
+    frontend_uri = 'http://localhost:3001';
+  }
+
 const client_id = process.env.CLIENT_ID
 // const client_id = "595bf34db17741f0a2d9cac0eaeb7bce"
 const client_secret = process.env.CLIENT_SECRET;
