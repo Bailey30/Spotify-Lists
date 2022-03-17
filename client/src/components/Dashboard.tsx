@@ -35,6 +35,7 @@ export default function Dashboard() {
 
   useEffect(() => {
     getUserData(accessToken)
+    console.log(accessToken);
   }, [accessToken])
 
   useEffect(() => {

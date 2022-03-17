@@ -202,11 +202,10 @@ app.post('/refresh_token/:refreshToken', async function (req, res) { //404 error
     });
 });
 
-// All remaining requests return the React app, so it can handle routing.
-app.get('/*', function (request, response) {
+ // All remaining requests return the React app, so it can handle routing.
+  app.get('*', function (request, response) {
     response.sendFile(path.resolve(__dirname, '../client/public', 'index.html'));
-});
-
+  });
 app.listen(port, () => {
     console.log(`listening on ${port}`);
 })
