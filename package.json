@@ -1,6 +1,7 @@
 {
   "scripts": {
-    "dev": "nodemon index.ts"
+    "dev": "nodemon index.ts",
+    "heroku-postbuild": "cd client && npm install && npm run build"
   },
   "dependencies": {
     "@types/cors": "^2.8.12",
