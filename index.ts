@@ -7,6 +7,7 @@ const request = require('request');
 const cookieParser = require('cookie-parser');
 const SpotifyWebApi = require('spotify-web-api-node');
 const path = require("path")
+const history = require('connect-history-api-fallback');
 
 const port = process.env.PORT || 3000;
 const app = express()
@@ -20,6 +21,16 @@ app
     .use(express.static(path.resolve(__dirname, '../client/build')))
     .use(cors())
     .use(cookieParser())
+    .use(
+        history({
+          verbose: true,
+          rewrites: [
+            { from: /\/login/, to: '/login' },
+            { from: /\/callback/, to: '/callback' },
+            { from: /\/refresh_token/, to: '/refresh_token' },
+          ],
+        }),
+      )
     .use(express.static(path.resolve(__dirname, '../client/build')));
 
 app.get('/', function (req, res) {
