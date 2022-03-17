@@ -1,0 +1,43 @@
+.main {
+    display: flex;
+    width: 100%;
+    min-height: calc(100vh - 65px);
+    padding-top: 30px;
+    /* margin-top: 5px; */
+    /* height: 100vh; */
+    /* border: 2px solid white; */
+}
+.pages {
+    margin-left: 240px;
+    flex: 1 1 auto;
+    /* The above is shorthand for:
+  flex-grow: 1,
+  flex-shrink: 1,
+  flex-basis: auto
+  */
+}
+
+@media(max-width:1400px){
+  .main {
+    margin-top: 25px;
+  }
+}
+
+@media (max-width: 1000px){
+  .pages{
+    /* width: 90%; */
+  }
+}
+
+
+@media (max-width: 768px){
+  .pages{
+    margin-left: 0;
+    width: 90%;
+    padding-bottom: 20%;
+  }
+  .main{
+    width: 100%;
+    margin-bottom: 50%;
+  }
+}

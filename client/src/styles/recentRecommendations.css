@@ -1,0 +1,23 @@
+.main {
+    display: flex;
+    background-color: black;
+    min-width: 100%;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    height: 100%;
+    /* margin: 0 auto; */
+    
+}
+
+/* .timeRange {
+    display: flex;
+    width: 100%;
+    justify-content: space-evenly;
+} */
+
+@media (max-width: 768px){
+    .main {
+        flex-direction: column;
+    }
+}

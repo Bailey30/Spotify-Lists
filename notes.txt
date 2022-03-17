@@ -1,0 +1,19 @@
+to do:
+add songs to "up next"
+have lists automatically play through - done
+recommendations based on genre
+
+- play arrow change location on song auto change 
+- send name of artist that list is based on
+- mobile responsiveness
+- playlists
+- homepage
+- larger pictures
+
+echo "# Spotify-Lists" >> README.md
+git init
+git add README.md
+git commit -m "first commit"
+git branch -M main
+git remote add origin https://github.com/Bailey30/Spotify-Lists.git
+git push -u origin main

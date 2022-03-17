@@ -1,0 +1,57 @@
+.body {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+.main {
+    color: white;
+    padding: 0;
+    /* display: flex; */
+    min-width: 100%;
+    /* align-items: center; */
+    /* justify-content: center; */
+    overflow-y: hidden;
+}
+.column {
+    width: 100%;
+}
+
+
+@media (max-width: 768px){
+    .timeRange{
+        right: 5%;
+        font-size: 16px;
+        top: 60px;
+        width: 60%;
+    }
+    .main {
+        overflow-x:hidden
+         ;
+    }
+    
+}
+
+.hover {
+    text-decoration: underline;
+    text-underline-offset: 5px;
+}
+.select {
+    background-color: black;
+    color: white;
+    width: 200px;
+    height: 20px;
+    border: 1px solid green;
+    margin-top: 10px;
+    /* position: absolute; */
+    right: 5%;
+    top: 13%;
+    font-size: 16px;
+    font-style: italic;
+}
+.option {
+    font-size: 20px;
+    font-style: italic;
+
+}

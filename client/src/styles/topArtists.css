@@ -1,0 +1,99 @@
+.main {
+    color: white;
+    display: flex;
+    min-width: 100%;
+    align-items: center;
+    justify-content: center;
+}
+.cont {
+    width: 300px;
+    overflow-y: scroll;
+    max-height: 800px;
+    position: fixed;
+    top: 5%;
+    left: 250px;
+    align-self: flex-start;
+}
+
+.heading {
+    position: absolute;
+    top: 5%;
+    padding-left: 26px;
+    font-size: 25px;
+    font-style: italic;
+    font-weight: 200;
+    text-align: left;
+}
+
+.listItem {
+    text-align: left;
+    padding-left: 30px;
+    font-size: 20px;
+    font-weight: 400;
+    margin-top: 5px;
+}
+.listItem:hover {
+    background-color: #555555;
+}
+
+/* width */
+::-webkit-scrollbar {
+    width: 5px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+  
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #888;
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
+
+  .trackList {
+      width: 100%;
+      /* margin-top: 0px; */
+      /* height: fit-content; */
+      padding-left: 300px;
+      margin-bottom: 50px;
+  }
+
+  @media (max-width: 1000px){
+    .cont{
+      position: static;
+      display: flex;
+      flex-direction: row;
+      min-width: 100%;
+      border: none;
+      overflow-y: hidden;
+    }
+    .listItem {
+      display: flex;
+      align-items: center;
+      text-align: center;
+      min-width: fit-content;
+      height: 40px;
+      padding: 5px;
+    }
+   
+    .trackList{
+      padding-left: 0;
+      width: 100%;
+    }
+    .main {
+      flex-direction: column;
+      width: 100%;
+    }
+  }
+
+  @media (max-width: 768px){
+    .trackList{
+      width: 100%;
+    }
+  }

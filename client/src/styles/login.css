@@ -1,0 +1,66 @@
+.page {
+    height: 100vh;
+    width: 100vw;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    /* background-color: black; */
+    font-family: "Syncopate", sans-serif;
+}
+.background {
+    position: absolute;
+    z-index: -1;
+    width: 100vw;
+    height: 100vh;
+    background-color: black;
+    transform: translateY(-100%);
+}
+.title {
+    display: flex;
+    flex-direction: column;
+}
+.wordContainer {
+    overflow: hidden;
+    /* border: 1px solid green; */
+
+    width: fit-content;
+    height: fit-content;
+    display: flex;
+    margin: 0 auto;
+    /* align-items: center; */
+    /* justify-content: flex-start; */
+}
+.word {
+    width: fit-content;
+    display: flex;
+    justify-content: flex-start;
+    transform: translateY(-100%);
+    font-size: 50px;
+    font-weight: 700;
+}
+.quick {
+    letter-spacing: 15px;
+}
+.lists {
+    margin-left: 20px;
+    letter-spacing: 24px;
+}
+.explanation {
+    width: 300px;
+    font-weight: 100;
+    letter-spacing: 1px;
+    transform: translateY(100%);
+    font-family: "Overpass", sans-serif;
+}
+.link{
+    font-family: "Overpass", sans-serif;
+    border: 1px solid white;
+    border-radius: 50vw;
+    padding: 5px;
+    width: 200px;
+    margin: 10px;
+    /* transform: translateY(150%); */
+    opacity: 0;
+}

@@ -1,0 +1,72 @@
+.nav {
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 250px;
+    border-right: 1px solid white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #000000;
+    /* margin-bottom: 100px; */
+    margin: 0;
+}
+a, a:hover, a:focus, a:active {
+    text-decoration: none;
+    color: white;
+}
+.links {
+   
+    margin: 0;
+    padding-bottom: 100px;
+    width: 100%;
+}
+.navHeader{
+    display: flex;
+    align-items: center;
+    padding-left: 0px;
+    margin: 10px auto;
+    width: 80%;
+    height: 50px;
+    text-decoration: none;
+    color:white;
+    text-align: left;
+    letter-spacing: 5px;
+    font-size: 22px;
+    font-weight: 100;
+    font-style: italic;
+}
+.navItem{
+    display: flex;
+    align-items: center;
+    padding-left: 0px;
+    margin: 10px auto;
+    width: 80%;
+    text-align:left;
+    height: 50px;
+    text-decoration: none;
+    color:white;
+    /* width: 100%; */
+    font-size: 22px;
+    font-weight: 200;
+    font-style: italic;
+}
+.navItem:hover{
+    text-decoration: underline;
+}
+.horizontalRule {
+    width: 80%;
+    margin-bottom: 30px;
+}
+ @media (max-width: 768px) {
+     .nav {
+         transform: translateX(-250px);
+         transition: all 0.25s ease;
+     }
+ }
+
+
+
+/* nav width needs shrinking on size change, disappear at tablet, appear at bottom */

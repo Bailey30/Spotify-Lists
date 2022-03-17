@@ -1,0 +1,40 @@
+.header {
+    color: white;
+    background-color: black;
+    height: 55px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* padding-top: 10px; */
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+}
+.nameAndIcon {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    padding-right: 30px;
+}
+.userName {
+margin: 0 10px;    
+}
+
+.iconCont {
+    height: 70%;
+}
+.icon {
+    height: 100%;
+}
+.menuButton {
+    font-size: 40px;
+    padding-left: 20px;
+    display: flex;
+    align-items: center;
+}
+@media(max-width: 1000px){
+    .nameAndIcon {
+        padding-right: 20px;
+    }
+}
