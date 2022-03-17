@@ -27,6 +27,8 @@ app.get('/', function (req, res) {
 });
 
 
+const client_id = process.env.CLIENT_ID
+const client_secret = process.env.CLIENT_SECRET;
 
 // Priority serve any static files.
 
@@ -37,9 +39,6 @@ if (process.env.NODE_ENV !== 'production') {
     frontend_uri = 'http://localhost:3001';
   }
 
-const client_id = process.env.CLIENT_ID
-// const client_id = "595bf34db17741f0a2d9cac0eaeb7bce"
-const client_secret = process.env.CLIENT_SECRET;
 const scope = 'user-read-private user-read-email user-read-recently-played user-top-read user-follow-read user-follow-modify playlist-read-private playlist-read-collaborative playlist-modify-public streaming user-read-playback-state user-modify-playback-state user-library-read user-library-modify'
 const stateKey = "spotify_auth_state"
 
@@ -58,7 +57,7 @@ app.get("/login", function (req: Request, res: Response) {
     const state = generateRandomString(16);
     //stateKey is name of cookie, state is random code
     res.cookie(stateKey, state);
-
+    console.log(client_id);
     // your application requests authorization
     res.redirect('https://accounts.spotify.com/authorize?' +
         //! can i use querystring or something else?
