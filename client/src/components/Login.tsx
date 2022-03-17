@@ -1,11 +1,13 @@
-import React, {useEffect } from 'react';
+import React, { useEffect } from 'react';
 
 import gsap from "gsap";
 import "../styles/global.css"
 import "../styles/login.css"
 
-const LOGIN_URI: string = "http://localhost:3000/login"
-
+const LOGIN_URI: string =
+  process.env.NODE_ENV !== 'production'
+    ? 'http://localhost:3000/login'
+    : 'https://spotify-profile.herokuapp.com/login';
 
 const Login = () => {
 
@@ -32,7 +34,7 @@ const Login = () => {
     gsap.to(".link", {
       y: 0,
       delay: 1.5,
-      opacity:1 
+      opacity: 1
     })
 
   }, [])
@@ -62,7 +64,7 @@ const Login = () => {
 
       </div>
       <div className="wordContainer">
-      <a href={LOGIN_URI} className="link">Login to Spotify</a>
+        <a href={LOGIN_URI} className="link">Login to Spotify</a>
       </div>
     </div>
   )
