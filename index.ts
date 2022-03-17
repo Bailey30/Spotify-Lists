@@ -39,7 +39,7 @@ app.get('/', function (req, res) {
 
 
 // const client_id = process.env.CLIENT_ID
-const client_id = ""
+var client_id = '';
 const client_secret = process.env.CLIENT_SECRET;
 
 // Priority serve any static files.
