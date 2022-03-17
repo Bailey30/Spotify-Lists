@@ -62,7 +62,7 @@ a, a:hover, a:focus, a:active {
 }
  @media (max-width: 768px) {
      .nav {
-         transform: translateX(-250px);
+         transform: translateX(-251px);
          transition: all 0.25s ease;
      }
  }

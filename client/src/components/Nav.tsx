@@ -9,24 +9,22 @@ interface AppProps {
 }
 
 export const Nav = ({showNav, setShowNav}:AppProps) => {
-    const mediaMatch = window.matchMedia("(max-width: 768px)")
-    const [matches, setMatches] = useState(mediaMatch.matches);
-    useEffect(() => {
-        const handler = (e: { matches: boolean | ((prevState: boolean) => boolean) }) => setMatches(e.matches);
-        mediaMatch.addListener(handler);
-        console.log(mediaMatch);
-        return () => mediaMatch.removeListener(handler);
-      });
-      useEffect(()=> {
-          console.log(matches);
-      },[matches])
-
-      
+    // const mediaMatch = window.matchMedia("(max-width: 768px)")
+    // const [matches, setMatches] = useState(mediaMatch.matches);
+    // useEffect(() => {
+    //     const handler = (e: { matches: boolean | ((prevState: boolean) => boolean) }) => setMatches(e.matches);
+    //     mediaMatch.addListener(handler);
+    //     console.log(mediaMatch);
+    //     return () => mediaMatch.removeListener(handler);
+    //   });
+    //   useEffect(()=> {
+    //       console.log(matches);
+    //   },[matches])
 
       const styles:any = { 
         transform: `translate(0px, 0px)` ,
-       
     };
+
     return (
         <div>
             <div className='nav' style={showNav ? styles: null}>

@@ -6,9 +6,6 @@ import List from './List';
 import { StoreContext } from './store';
 import "../styles/topAndRecent.css"
 
-
-
-
 export default function TopTracks() {
     const [show, setShow] = useState(false)
     const [topTracks, setTopTracks] = useState<track[]>([])
@@ -69,11 +66,6 @@ export default function TopTracks() {
                     >{ranges[i]}</span>
                 })}
             </div> */}
-            {/* <select className="select">
-                <option value="All time" className='option'>All time</option>
-                <option value="Last 6 months" className='option'>Last 6 months</option>
-                <option value="Last 4 weeks" className='option'>Last 4 weeks</option>
-            </select> */}
         <div className="main" >
             <List tracks={topTracks} title={"your most played tracks"} handlePlayer={handlePlayer} setRange={setRange} value={value}/>
             </div>

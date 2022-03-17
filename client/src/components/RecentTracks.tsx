@@ -9,14 +9,10 @@ import "../styles/topAndRecent.css"
 
 interface AppProps {
     accessToken: string | null
-  
 }
    
 const RecentTracks = ({ accessToken }: AppProps) => {
-    const [show, setShow] = useState(false)
     const {playingTrack,setPlayingTrack, playArray, setPlayArray, recentTracks,setRecentTracks, trackName, setTrackName} = useContext(StoreContext)
-
-
 
     useEffect(() => {
         const trackData = async()=> {
@@ -36,7 +32,6 @@ const RecentTracks = ({ accessToken }: AppProps) => {
 
     return (
         <div className='main'>
-
         <List tracks={recentTracks} title={"recently played tracks"} handlePlayer={handlePlayer}/>
         </div>
         

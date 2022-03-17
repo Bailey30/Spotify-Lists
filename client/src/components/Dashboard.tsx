@@ -10,7 +10,6 @@ import StoreProvider from "./store"
 import Store from './store';
 import RecentRecommendations from './RecentRecommendations';
 import GenreRecommendations from './GenreRecommendations';
-import TopAndRecent from './TopAndRecent';
 import { Nav } from './Nav';
 import { getTracks } from '../utils';
 import RecentTracks from './RecentTracks';
@@ -22,7 +21,6 @@ import TopTracks from './TopTracks';
 export default function Dashboard() {
   const [accessToken, setaccessToken] = useState<string>("");
   const [user, setUser] = useState<UserData>()
-  const [trackData, setTrackData] = useState<track[]>()
   const [showNav, setShowNav] = useState<boolean>(false)
 
   const getUserData = async (accessToken: string) => {
@@ -37,40 +35,29 @@ export default function Dashboard() {
 
   useEffect(() => {
     getUserData(accessToken)
-    const topLevelTracks = async () => {
-      const tracks = await getTracks(accessToken)
-      setTrackData(tracks)
-    }
-    topLevelTracks()
   }, [accessToken])
 
- useEffect(()=> {
-   console.log(showNav);
- },[showNav])
+  useEffect(() => {
+    console.log(showNav);
+  }, [showNav])
   return (
     <div >
       <StoreProvider>
-        <Profile user={user} setShowNav={setShowNav} showNav={showNav}/>
+        <Profile user={user} setShowNav={setShowNav} showNav={showNav} />
         <div className='main'>
           <Router>
-            <Nav showNav={showNav} setShowNav={setShowNav}/>
+            <Nav showNav={showNav} setShowNav={setShowNav} />
             <div className='pages'>
-            <Routes>
-              <Route path="/" element={<RecentRecommendations accessToken={accessToken}/>} />
-              {/* <Route path="/topAndRecent" element={<TopAndRecent accessToken={accessToken} trackData={trackData!}/>} /> */}
-              <Route path="/topArtists" element={<TopArtists />} />
-
-              {/* <TopArtists /> */}
-              {/* <TopAndRecent accessToken={accessToken} /> */}
-              <Route path="/topTracks" element={<TopTracks/>} />
-          <Route path="/recentTracks" element={<RecentTracks accessToken={accessToken} />}/>
-              {/* <RecentRecommendations /> */}
-              {/* <GenreRecommendations /> */}
-            </Routes>
-          </div>
+              <Routes>
+                <Route path="/" element={<RecentRecommendations accessToken={accessToken} />} />
+                <Route path="/topArtists" element={<TopArtists />} />
+                <Route path="/topTracks" element={<TopTracks />} />
+                <Route path="/recentTracks" element={<RecentTracks accessToken={accessToken} />} />
+              </Routes>
+            </div>
           </Router>
         </div>
-          <Player accessToken={accessToken} />
+        <Player accessToken={accessToken} />
       </StoreProvider>
     </div>
   );

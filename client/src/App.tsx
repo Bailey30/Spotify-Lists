@@ -6,13 +6,12 @@ import Dashboard from "./components/Dashboard"
 
 import { token } from "./spotify"
 import { createContext, useContext } from "react";
-import { AccessTokenContext } from "./AccessTokenContext";
+
 
 
 
 
 const App = () => {
-  const access_token = useContext(AccessTokenContext)
   const [access_Token, setAccess_Token] = useState<string | null>()
 
   // on page load check for token - should be token

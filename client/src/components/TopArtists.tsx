@@ -54,17 +54,12 @@ const TopArtists = () => {
 
   return (
     < div className='main'>
-
-
       {/* <div className='heading'>Top Artists</div> */}
       <div className="cont">
         {topArtists?.map((artist: any, i: number) => {
           return <div key={artist.id} onClick={() => getRecommendedTracks(artist.id)} className="listItem">{artist.name}</div>
         })}
       </div>
-
-
-
 
       <div className="trackList">
       {<List tracks={recommendedTracks} handlePlayer={handlePlayer} title={"tracks based on artist"}/>}

@@ -13,8 +13,6 @@ interface AppProps {
 }
 
 const RecentRecommendations = ({ accessToken }: AppProps) => {
-    const [show, setShow] = useState(false)
-    const context = useContext(StoreContext)
     const { playingTrack, setPlayingTrack, playArray, setPlayArray, setRecentTracks, recentTracks, trackName, setTrackName } = useContext(StoreContext)
 
     const [recentArtistURIs, setRecentArtistURIs] = useState<string[]>([])
@@ -75,7 +73,6 @@ const RecentRecommendations = ({ accessToken }: AppProps) => {
 
     return (
         <div className="main">
-
             {recommendedArtistTracks && <List tracks={recommendedArtistTracks} handlePlayer={handlePlayer} title={"based on recent artists"}/>}
             
             {recommendedTrackTracks && <List tracks={recommendedTrackTracks} handlePlayer={handlePlayer} title={"based on recent tracks"}/>}

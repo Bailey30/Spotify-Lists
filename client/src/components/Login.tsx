@@ -1,21 +1,13 @@
-import React, { useContext, useState, useEffect, useRef } from 'react';
-import { useNavigate } from 'react-router';
-import { AccessTokenContext } from '../AccessTokenContext';
-import { token } from '../spotify';
+import React, {useEffect } from 'react';
+
 import gsap from "gsap";
 import "../styles/global.css"
 import "../styles/login.css"
 
 const LOGIN_URI: string = "http://localhost:3000/login"
 
-type Props = {
-  // setLogin: React.Dispatch<React.SetStateAction<boolean>>
-  // setLogin: any
-  // login: boolean
-}
 
 const Login = () => {
-
 
   // user clicks login and app redirect to spotify authorization page (routes in server index.ts) 
   // app then redirects to /callback with access and refresh codes in url
