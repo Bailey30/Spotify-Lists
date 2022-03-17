@@ -1,3 +1,4 @@
+require('dotenv').config();
 import express from "express"
 import { Request, Response } from "express"
 import cors from "cors"
@@ -7,7 +8,7 @@ const cookieParser = require('cookie-parser');
 const SpotifyWebApi = require('spotify-web-api-node');
 const path = require("path")
 
-const port = 3000
+const port = process.env.PORT || 3000;
 const app = express()
 
 // app.set("Access-Control-Allow-Origin", "https://localhost:3000/");
@@ -36,8 +37,9 @@ app.get("/", (req, res) => {
 
 const redirect_uri = "http://localhost:3000/callback"
 const frontend_uri = "http://localhost:3001"
-const client_id = "595bf34db17741f0a2d9cac0eaeb7bce"
-const client_secret = "0dc47801082147d588f35d47e12a2cb8"
+const client_id = process.env.CLIENT_ID
+// const client_id = "595bf34db17741f0a2d9cac0eaeb7bce"
+const client_secret = process.env.CLIENT_SECRET;
 const scope = 'user-read-private user-read-email user-read-recently-played user-top-read user-follow-read user-follow-modify playlist-read-private playlist-read-collaborative playlist-modify-public streaming user-read-playback-state user-modify-playback-state user-library-read user-library-modify'
 const stateKey = "spotify_auth_state"
 
