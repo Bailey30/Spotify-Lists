@@ -7,7 +7,7 @@ import "../styles/login.css"
 const LOGIN_URI: string =
   process.env.NODE_ENV !== 'production'
     ? 'http://localhost:3000/login'
-    : 'https://spotify-profile.herokuapp.com/login';
+    : 'https://spotify-lists.herokuapp.com/login';
 
 const Login = () => {
 
