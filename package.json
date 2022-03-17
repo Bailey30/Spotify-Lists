@@ -6,7 +6,7 @@
     "postinstall": "tsc && mv -i -v public dist/ && rm -v -rf src",
     "watch-ts": "tsc -w",
     "heroku-postbuild": "cd client && npm install && npm run build",
-    "deploy": "git add . && git commit -m Heroku && git push heroku master"
+    "deploy": "git add . && git commit -m Heroku && git push heroku main"
   },
   "dependencies": {
     "@types/cors": "^2.8.12",
