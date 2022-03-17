@@ -38,17 +38,16 @@ app.get('/', function (req, res) {
 });
 
 
-// const client_id = process.env.CLIENT_ID
-var client_id = '';
-const client_secret = process.env.CLIENT_SECRET;
+const CLIENT_ID = process.env.CLIENT_ID
+const CLIENT_SECRET = process.env.CLIENT_SECRET;
 
 // Priority serve any static files.
 
-let redirect_uri = process.env.redirect_uri || "http://localhost:3000/callback"
-let frontend_uri = process.env.frontend_uri || "http://localhost:3001"
+let REDIRECT_URI = process.env.REDIRECT_URI || "http://localhost:3000/callback"
+let FRONTEND_URI = process.env.FRONTEND_URI || "http://localhost:3001"
 if (process.env.NODE_ENV !== 'production') {
-    redirect_uri = 'http://localhost:3000/callback';
-    frontend_uri = 'http://localhost:3001';
+    REDIRECT_URI = 'http://localhost:3000/callback';
+    FRONTEND_URI = 'http://localhost:3001';
   }
 
 const scope = 'user-read-private user-read-email user-read-recently-played user-top-read user-follow-read user-follow-modify playlist-read-private playlist-read-collaborative playlist-modify-public streaming user-read-playback-state user-modify-playback-state user-library-read user-library-modify'
@@ -69,15 +68,15 @@ app.get("/login", function (req: Request, res: Response) {
     const state = generateRandomString(16);
     //stateKey is name of cookie, state is random code
     res.cookie(stateKey, state);
-    console.log(client_id);
+    console.log(CLIENT_ID);
     // your application requests authorization
     res.redirect('https://accounts.spotify.com/authorize?' +
         //! can i use querystring or something else?
         querystring.stringify({
             response_type: 'code',
-            client_id: client_id,
+            client_id: CLIENT_ID,
             scope: scope,
-            redirect_uri: redirect_uri,
+            redirect_uri: REDIRECT_URI,
             state: state,
             show_dialog: true
         }));
@@ -94,9 +93,9 @@ app.get("/callback", async (req: Request, res: Response) => {
     var storedState = req.cookies ? req.cookies[stateKey] : null;
 
     const spotifyApi = new SpotifyWebApi({
-        clientId: client_id,
-        clientSecret: client_secret,
-        redirectUri: redirect_uri
+        clientId: CLIENT_ID,
+        clientSecret: CLIENT_SECRET,
+        redirectUri: REDIRECT_URI
     });
 
     if (state === null || state !== storedState) {
@@ -114,7 +113,7 @@ app.get("/callback", async (req: Request, res: Response) => {
             const refresh_token = authGrant.body.refresh_token;
 
             // access token and refresh token in frontend url - 
-            res.redirect(`${frontend_uri}/#${querystring.stringify({
+            res.redirect(`${FRONTEND_URI}/#${querystring.stringify({
                 access_token,
                 refresh_token
             })}`)
@@ -197,7 +196,7 @@ app.post('/refresh_token/:refreshToken', async function (req, res) { //404 error
     console.log("refresh token: ", refresh_token);
     var authOptions = {
         url: 'https://accounts.spotify.com/api/token',
-        headers: { 'Authorization': 'Basic ' + (new Buffer(client_id + ':' + client_secret).toString('base64')) },
+        headers: { 'Authorization': 'Basic ' + (new Buffer(CLIENT_ID + ':' + CLIENT_SECRET).toString('base64')) },
         form: {
             grant_type: 'refresh_token',
             refresh_token: refresh_token
