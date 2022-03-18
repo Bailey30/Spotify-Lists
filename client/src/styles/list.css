@@ -2,7 +2,7 @@
     color:white;
     /* width: 50%; */
     flex: 1;
-    padding: 55px 100px;
+    padding: 55px  100px 100px;
     margin: 0 auto;
     align-self: flex-start;
 }
@@ -63,7 +63,6 @@
 }
 .showMore {
     font-style: italic;
-    
 }
 .timeRange {
     /* border: 1px solid green; */
@@ -109,6 +108,9 @@
         margin: 0;
         width: 100%;
     }
+    .tracksRow {
+        margin: 10px 0;
+    }
     .listHeading {
         padding-top: 30px;
     }
@@ -120,5 +122,9 @@
    }
    .nameAndArtist {
        margin-right: 10px;
+   }
+   .playIcon {
+       font-size: 20px;
+       margin: 5px;
    }
 }

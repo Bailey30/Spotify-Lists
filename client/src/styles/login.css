@@ -53,6 +53,7 @@
     letter-spacing: 1px;
     transform: translateY(100%);
     font-family: "Overpass", sans-serif;
+    margin: 20px 0;
 }
 .link{
     font-family: "Overpass", sans-serif;

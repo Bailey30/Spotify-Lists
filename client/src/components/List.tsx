@@ -18,7 +18,6 @@ const List = (props: any) => {
     <div className="tracksColumn">
       <div className="headingCont">
         <div className="listHeading">{props.title}</div>
-
         {props.setRange ? 
           <div className='timeRange'>
             {ranges.map((range, i) => {

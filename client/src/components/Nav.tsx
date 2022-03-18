@@ -1,35 +1,39 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from "react-router-dom"
+import { AiOutlineClose } from "react-icons/ai"
+
 import "../styles/nav.css"
 import "../styles/global.css"
 
 interface AppProps {
-    showNav : boolean
+    showNav: boolean
     setShowNav: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-export const Nav = ({showNav, setShowNav}:AppProps) => {
-    // const mediaMatch = window.matchMedia("(max-width: 768px)")
-    // const [matches, setMatches] = useState(mediaMatch.matches);
-    // useEffect(() => {
-    //     const handler = (e: { matches: boolean | ((prevState: boolean) => boolean) }) => setMatches(e.matches);
-    //     mediaMatch.addListener(handler);
-    //     console.log(mediaMatch);
-    //     return () => mediaMatch.removeListener(handler);
-    //   });
-    //   useEffect(()=> {
-    //       console.log(matches);
-    //   },[matches])
+export const Nav = ({ showNav, setShowNav }: AppProps) => {
+    const mediaMatch = window.matchMedia("(max-width: 768px)")
+    const [matches, setMatches] = useState(mediaMatch.matches);
+    useEffect(() => {
+        const handler = (e: { matches: boolean | ((prevState: boolean) => boolean) }) => setMatches(e.matches);
+        mediaMatch.addListener(handler);
+        console.log(mediaMatch);
+        return () => mediaMatch.removeListener(handler);
+      });
+      useEffect(()=> {
+          console.log(matches);
+      },[matches])
 
-      const styles:any = { 
-        transform: `translate(0px, 0px)` ,
+    const styles: any = {
+        transform: `translate(0px, 0px)`,
     };
 
     return (
         <div>
-            <div className='nav' style={showNav ? styles: null}>
-                <span onClick={()=>setShowNav(!showNav)}>close</span>
+            <div className='nav' style={showNav ? styles : null}>
                 <div className="links">
+                    {matches && <div className="closeIconCont">
+                        <span onClick={() => setShowNav(!showNav)} className="close"><AiOutlineClose /></span>
+                    </div>}
                     <div className='navHeader'>LISTS</div>
                     <Link to="/" className='navItem'>Recent tracks and artists</Link>
                     <Link to="/topArtists" className='navItem'>Your top artists</Link>

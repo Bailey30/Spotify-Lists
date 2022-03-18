@@ -13,17 +13,19 @@
     /* margin-bottom: 100px; */
     margin: 0;
 }
-a, a:hover, a:focus, a:active {
+a,
+a:hover,
+a:focus,
+a:active {
     text-decoration: none;
     color: white;
 }
 .links {
-   
     margin: 0;
     padding-bottom: 100px;
     width: 100%;
 }
-.navHeader{
+.navHeader {
     display: flex;
     align-items: center;
     padding-left: 0px;
@@ -31,42 +33,54 @@ a, a:hover, a:focus, a:active {
     width: 80%;
     height: 50px;
     text-decoration: none;
-    color:white;
+    color: white;
     text-align: left;
     letter-spacing: 5px;
     font-size: 22px;
     font-weight: 100;
     font-style: italic;
 }
-.navItem{
+.navItem {
     display: flex;
     align-items: center;
     padding-left: 0px;
     margin: 10px auto;
     width: 80%;
-    text-align:left;
+    text-align: left;
     height: 50px;
     text-decoration: none;
-    color:white;
+    color: white;
     /* width: 100%; */
     font-size: 22px;
     font-weight: 200;
     font-style: italic;
 }
-.navItem:hover{
+.navItem:hover {
     text-decoration: underline;
 }
 .horizontalRule {
     width: 80%;
     margin-bottom: 30px;
 }
- @media (max-width: 768px) {
-     .nav {
-         transform: translateX(-251px);
-         transition: all 0.25s ease;
-     }
- }
+.closeIconCont{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 80%;
+    margin: 0 auto;
+    /* height: fit-content; */
 
+}
+.close {
+    font-size: 20px;
+    /* align-self: flex-start; */
+}
 
+@media (max-width: 768px) {
+    .nav {
+        transform: translateX(-251px);
+        transition: all 0.25s ease;
+    }
+}
 
 /* nav width needs shrinking on size change, disappear at tablet, appear at bottom */
