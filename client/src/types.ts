@@ -11,7 +11,7 @@ export type track = {
     name: string
     preview_url: string
     uri: string
-    image: string
+    image?: string
     duration: number
     artistURI: string
 }

@@ -43,7 +43,7 @@ export const pushSelectedInfo = (data: any) => {
             name: item.name,
             preview_url: item.preview_url,
             uri: item.uri,
-            image: item.album.images[2].url,
+            image: item.album.images[2]?.url,
             duration: item.duration_ms,
             artistURI: item.artists[0].uri
         })

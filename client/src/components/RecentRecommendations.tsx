@@ -59,8 +59,11 @@ const RecentRecommendations = ({ accessToken }: AppProps) => {
         const uniqueURIs: string[] = [...new Set(trackURIs)]
         const URInums = uniqueURIs.map((item) => item.replace("spotify:track:", ""))
         const data = await axios.get(`https://api.spotify.com/v1/recommendations?seed_tracks=${URInums.slice(0, 5)}&limit=50`, { headers })
-        const allTracks = pushSelectedInfo(data.data.tracks)
-        setRecommendedTrackTracks(allTracks)
+        console.log(data);
+        if (data) {
+            const allTracks = pushSelectedInfo(data.data.tracks)
+            setRecommendedTrackTracks(allTracks)
+        }
     }
 
     // when choosing a song - send whole list to player
@@ -73,9 +76,9 @@ const RecentRecommendations = ({ accessToken }: AppProps) => {
 
     return (
         <div className="main">
-            {recommendedArtistTracks && <List tracks={recommendedArtistTracks} handlePlayer={handlePlayer} title={"based on recent artists"}/>}
-            
-            {recommendedTrackTracks && <List tracks={recommendedTrackTracks} handlePlayer={handlePlayer} title={"based on recent tracks"}/>}
+            {recommendedArtistTracks && <List tracks={recommendedArtistTracks} handlePlayer={handlePlayer} title={"based on recent artists"} />}
+
+            {recommendedTrackTracks && <List tracks={recommendedTrackTracks} handlePlayer={handlePlayer} title={"based on recent tracks"} />}
         </div>
     );
 }

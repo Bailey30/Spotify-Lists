@@ -17,11 +17,11 @@ const Profile = ({ user, setShowNav, showNav }: AppProps) => {
 
     window.addEventListener("scroll", ()=> {
         let currentScroll = window.scrollY;
+        
         if (currentScroll > lastScroll!){
             setShow(false)
-        } else if (currentScroll< lastScroll!) {
+        } else if (currentScroll< lastScroll! ) {
             setShow(true)
-
         }
         setLastScroll(currentScroll)
 

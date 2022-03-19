@@ -188,7 +188,7 @@ app.get("/callback", async (req: Request, res: Response) => {
 //     }
 // });
 
-app.post('/refresh_token/:refreshToken', async function (req, res) { //404 error not found
+app.get('/refresh_token/:refreshToken', async function (req, res) { //404 error not found
     console.log("/refresh_token");
 
     // requesting access token from refresh token
