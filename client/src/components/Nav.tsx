@@ -16,11 +16,11 @@ export const Nav = ({ showNav, setShowNav }: AppProps) => {
     useEffect(() => {
         const handler = (e: { matches: boolean | ((prevState: boolean) => boolean) }) => setMatches(e.matches);
         mediaMatch.addListener(handler);
-        console.log(mediaMatch);
+
         return () => mediaMatch.removeListener(handler);
       });
       useEffect(()=> {
-          console.log(matches);
+
       },[matches])
 
     const styles: any = {

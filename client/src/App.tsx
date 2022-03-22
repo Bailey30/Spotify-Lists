@@ -4,19 +4,17 @@ import './App.css';
 import Login from "./components/Login"
 import Dashboard from "./components/Dashboard"
 
-import { token } from "./spotify"
+import { token, GetAccessToken } from "./spotify"
 import { createContext, useContext } from "react";
 
 const App = () => {
-  const [access_Token, setAccess_Token] = useState<string | null>()
+  const [access_Token, setAccess_Token] = useState<string | null>() 
 
   // on page load check for token - should be token
   useEffect(() => {
-    setAccess_Token(token)
+    console.log("access token attempt from app.tsx");
+    setAccess_Token(GetAccessToken)
   }, [])    
-
-  console.log("accessToken from app.tsx: ", access_Token);
-  console.log(typeof access_Token);
 
   return (
     <div className="App">

@@ -19,7 +19,13 @@ const setLocalAccessToken = (token: string) => {
 };
 const setLocalRefreshToken = (token: string | null) => token && window.localStorage.setItem('spotify_refresh_token', token)
 const getTokenTimestamp = () => window.localStorage.getItem('spotify_token_timestamp') || "{}"; //!what is this
-const getLocalAccessToken = () => window.localStorage.getItem('spotify_access_token');
+const getLocalAccessToken = () => { 
+    console.log("attempting to get local access token");
+    const localAccessToken = window.localStorage.getItem('spotify_access_token')  
+    if (localAccessToken)
+    console.log("local access token: ", localAccessToken);
+    return localAccessToken
+}
 const getLocalRefreshToken = () => window.localStorage.getItem('spotify_refresh_token');
 
 
@@ -30,18 +36,13 @@ export const logout = () => {
     window.location.reload();
 };
 
-const client_id = "595bf34db17741f0a2d9cac0eaeb7bce"
-const client_secret = "0dc47801082147d588f35d47e12a2cb8"
 // Refresh the token
 const refreshAccessToken = async () => {
     try {
         console.log("refresh token attempt");
         // const { data } = await axios.get(`/refresh_token?refresh_token=${getLocalRefreshToken()}`);
         const refreshToken = getLocalRefreshToken()
-        console.log(refreshToken);
-        const test = "test"
         const { data } = await axios.post(`http://localhost:3000/refresh_token/${refreshToken}`)
-        console.log(data);
         const { access_token } = data;
         setLocalAccessToken(access_token);
         return;
@@ -73,7 +74,7 @@ export const GetAccessToken = () => {
     }
 
     const localAccessToken = getLocalAccessToken();
-
+    getLocalAccessToken()
     // If there is no ACCESS token in local storage, set it and return `access_token` from params
     if ((!localAccessToken || localAccessToken === 'undefined') && access_token) {
         setLocalAccessToken(access_token);
@@ -129,7 +130,6 @@ export const getRecentlyPlayed = (accessToken: string | null) => {
         console.log("player error");
         console.log(error);
     }
-
 }
 
 export const getTopArtistsShort = () =>

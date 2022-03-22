@@ -13,7 +13,7 @@ const List = (props: any) => {
   // console.log(props);
   const [hover, setHover] = useState<number | null>()
   const ranges = ["All time", "Last 6 months", "Last 4 weeks"]
-  console.log(props.value);
+
   return (
     <div className="tracksColumn">
       <div className="headingCont">

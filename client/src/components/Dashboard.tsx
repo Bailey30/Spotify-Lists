@@ -35,12 +35,8 @@ export default function Dashboard() {
 
   useEffect(() => {
     getUserData(accessToken)
-    console.log(accessToken);
   }, [accessToken])
 
-  useEffect(() => {
-    console.log(showNav);
-  }, [showNav])
   return (
     <div >
       <StoreProvider>
