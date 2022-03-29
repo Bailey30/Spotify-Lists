@@ -14,7 +14,6 @@ const Profile = ({ user, setShowNav, showNav }: AppProps) => {
     const [show, setShow] = useState<boolean>(true)
     const [lastScroll , setLastScroll]= useState<number|null>()
 
-
     window.addEventListener("scroll", ()=> {
         let currentScroll = window.scrollY;
         
@@ -26,12 +25,8 @@ const Profile = ({ user, setShowNav, showNav }: AppProps) => {
         setLastScroll(currentScroll)
 
     })
-    useEffect(()=> {
-        console.log(showNav);
-      },[showNav])
 
       const handleNav = ()=> {
-          console.log("nav");
         setShowNav(!showNav)
       }
 

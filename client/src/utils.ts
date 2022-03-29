@@ -1,15 +1,10 @@
-import TopTracks from "./components/TopTracks";
 import { getRecentlyPlayed } from "./spotify";
 import { track } from "./types";
 
-
-
-
-export const getTracks = async (accessToken: string | null) => {
+export const getTracks = async () => {
     try {
-        const data = await getRecentlyPlayed(accessToken)
-        // console.log(data);
-        const allTracks: track[] = []
+        const data = await getRecentlyPlayed()
+        const allTracks: track[] = []  
         data!.data.items.map(function (item: any, i: number) {
             // artist, album, name, preview_url, url, image
             allTracks.push({
@@ -24,13 +19,12 @@ export const getTracks = async (accessToken: string | null) => {
             })
             return null
         })
+        if (allTracks)
         return allTracks
-
     } catch (error) {
         console.log(error);
     }
 }
-
 
 
 export const pushSelectedInfo = (data: any) => {
@@ -91,7 +85,6 @@ export const getGenresFromArtist = (artists: any) => {
         genreArray.push(artist.genres.map((genre: string) => genre))
     })
     const flatArray = genreArray.flat()
-
     return [...new Set(flatArray)]
 }
 

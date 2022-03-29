@@ -1,155 +1,159 @@
 import axios from "axios"
-import React, { useState } from "react"
+
+import { useEffect } from "react"
+
 
 interface Tokens {
-
-    access_token: string | null
-    refresh_token: string | null
+    access_tokenparam: string | null
+    refresh_tokenparam: string | null
+    expires_inparam: number
 }
 
-
-
 // TOKENS ******************************************************************************************
-const EXPIRATION_TIME = 3600 * 1000; // 3600 seconds * 1000 = 1 hour in milliseconds
+const EXPIRATION_TIME = 3600; // 3600 seconds * 1000 = 1 hour in milliseconds
 
 const setTokenTimestamp = () => window.localStorage.setItem('spotify_token_timestamp', Date.now().toString());
+
 const setLocalAccessToken = (token: string) => {
     setTokenTimestamp();
     window.localStorage.setItem('spotify_access_token', token);
 };
-const setLocalRefreshToken = (token: string | null) => token && window.localStorage.setItem('spotify_refresh_token', token)
-const getTokenTimestamp = () => window.localStorage.getItem('spotify_token_timestamp') || "{}"; //!what is this
-const getLocalAccessToken = () => { 
-    console.log("attempting to get local access token");
-    const localAccessToken = window.localStorage.getItem('spotify_access_token')  
-    if (localAccessToken)
-    console.log("local access token: ", localAccessToken);
+export const getLocalAccessToken = () => {
+    const localAccessToken = window.localStorage.getItem('spotify_access_token')
     return localAccessToken
 }
+
+const setLocalRefreshToken = (token: string | null) => token && window.localStorage.setItem('spotify_refresh_token', token)
+
+const getTokenTimestamp = () => window.localStorage.getItem('spotify_token_timestamp') || "{}"; //!what is this
+
 const getLocalRefreshToken = () => window.localStorage.getItem('spotify_refresh_token');
 
 
-export const logout = () => {
-    window.localStorage.removeItem('spotify_token_timestamp');
-    window.localStorage.removeItem('spotify_access_token');
-    window.localStorage.removeItem('spotify_refresh_token');
-    window.location.reload();
-};
-
 // Refresh the token
-const refreshAccessToken = async () => {
+const refreshAccessToken = async (refresh_token: string | null) => {
     try {
-        console.log("refresh token attempt");
-        // const { data } = await axios.get(`/refresh_token?refresh_token=${getLocalRefreshToken()}`);
-        const refreshToken = getLocalRefreshToken()
-        const { data } = await axios.post(`http://localhost:3000/refresh_token/${refreshToken}`)
+        const { data } = await axios.post(`http://localhost:4000/refresh_token/${refresh_token}`)
         const { access_token } = data;
         setLocalAccessToken(access_token);
-        return;
     } catch (e) {
         console.error(e);
     }
 };
 
 export const getHashParams = () => {
-
     const params = new URLSearchParams(window.location.hash.substring(1));
-
-    console.log(params);
     const tokens: Tokens = {
-        access_token: params.get("access_token"),
-        refresh_token: params.get("refresh_token")
+        access_tokenparam: params.get("access_token"),
+        refresh_tokenparam: params.get("refresh_token"),
+        expires_inparam: parseInt(params.get("expires_in")!)
     }
     return tokens
 };
 
-export const GetAccessToken = () => {
-    const { access_token, refresh_token } = getHashParams()
-
-
-    // If token has expired
-    if (Date.now() - parseInt(getTokenTimestamp()) > EXPIRATION_TIME) {
-        console.warn('Access token has expired, refreshing...');
-        refreshAccessToken();
-    }
+export const GetAccessToken = (access_tokenparam?: any, refresh_tokenparam?: any, expires_inparam?: any) => {
+    useEffect(() => {
+        setLocalAccessToken(access_tokenparam)
+        setLocalRefreshToken(refresh_tokenparam)
+    }, [access_tokenparam])
 
     const localAccessToken = getLocalAccessToken();
     getLocalAccessToken()
-    // If there is no ACCESS token in local storage, set it and return `access_token` from params
-    if ((!localAccessToken || localAccessToken === 'undefined') && access_token) {
-        setLocalAccessToken(access_token);
-        setLocalRefreshToken(refresh_token);
-        return access_token;
-    }
-    console.log(localAccessToken);
-    // console.log(refresh_token);
+
     return localAccessToken;
 
 }
 
-export const token = GetAccessToken()
+export const getToken = () => {
+
+    if (Date.now() - parseInt(getTokenTimestamp()) as number > EXPIRATION_TIME) {
+        console.warn('Access token has expired, refreshing...');
+        const refresh_token = getLocalRefreshToken()
+        refreshAccessToken(refresh_token);
+        const new_access_token = getLocalAccessToken()
+        return new_access_token
+    } else {
+        return getLocalAccessToken()
+    }
+}
+
+export const token = getToken()
 
 // API Calls **********************************************************************************
 
-export const headers = {
+const headers = {
     Authorization: `Bearer ${token}`,
     "Content-Type": "application/json",
 }
 
 // export const getUser = () =>{ return axios.get('https://api.spotify.com/v1/me', { headers })};
 
-export const getUser = (token: string | null) => {
+export const getUser = () => {
     try {
-        const headers = {
-            Authorization: `Bearer ${token}`,
-            // "Content-Type": "application/json",
-        }
-        // console.log(token);
         return axios.get('https://api.spotify.com/v1/me', { headers })
     } catch (error) {
         console.log(error);
     }
 }
 
-export const getTopTracksLong = () =>
-    axios.get('https://api.spotify.com/v1/me/top/tracks?limit=50&time_range=long_term', { headers });
-export const getTopTracksMedium = () =>
-    axios.get('https://api.spotify.com/v1/me/top/tracks?limit=50&time_range=medium_term', { headers });
-export const getTopTracksShort = () =>
-    axios.get('https://api.spotify.com/v1/me/top/tracks?limit=50&time_range=short_term', { headers });
+export const getTopTracksLong = () => {
 
-export const getRecentlyPlayed = (accessToken: string | null) => {
-    try {
-        console.log("recently played attempt");
-        const headers = {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json",
-        }
-        return axios.get('https://api.spotify.com/v1/me/player/recently-played?limit=50', { headers });
-    } catch (error) {
-        console.log("player error");
-        console.log(error);
-    }
+    return axios.get('https://api.spotify.com/v1/me/top/tracks?limit=50&time_range=long_term', { headers });
+}
+export const getTopTracksMedium = () => {
+
+    return axios.get('https://api.spotify.com/v1/me/top/tracks?limit=50&time_range=medium_term', { headers });
+}
+export const getTopTracksShort = () => {
+
+    return axios.get('https://api.spotify.com/v1/me/top/tracks?limit=50&time_range=short_term', { headers });
 }
 
-export const getTopArtistsShort = () =>
-    axios.get('https://api.spotify.com/v1/me/top/artists?limit=50&time_range=short_term', {
-        headers,
-    });
-export const getTopArtistsMedium = () =>
-    axios.get('https://api.spotify.com/v1/me/top/artists?limit=50&time_range=medium_term', {
-        headers,
-    });
-export const getTopArtistsLong = () =>
-    axios.get('https://api.spotify.com/v1/me/top/artists?limit=50&time_range=long_term', { headers });
+export const getRecentlyPlayed = async () => {
+    if (headers.Authorization === 'Bearer null') {
+        window.location.reload()
+    }
+    return await axios.get('https://api.spotify.com/v1/me/player/recently-played?limit=50', { headers });
+}
 
-export const getDevice = () => axios.get('https://api.spotify.com/v1/me/player/devices', { headers })
+export const getTopArtistsShort = () => {
+    return axios.get('https://api.spotify.com/v1/me/top/artists?limit=50&time_range=short_term', { headers });
+}
+export const getTopArtistsMedium = () => {
+    return axios.get('https://api.spotify.com/v1/me/top/artists?limit=50&time_range=medium_term', { headers });
+}
+export const getTopArtistsLong = () => {
+    return axios.get('https://api.spotify.com/v1/me/top/artists?limit=50&time_range=long_term', { headers });
+}
 
+export const getDevice = () => {
+    return axios.get('https://api.spotify.com/v1/me/player/devices', { headers })
+}
 
-export const getAudioFeaturesMany = (ids: string[]) => axios.get(`https://api.spotify.com/v1/audio-features?ids=${ids.toString()}`, { headers })
+export const getAudioFeaturesMany = (ids: string[]) => {
+    return axios.get(`https://api.spotify.com/v1/audio-features?ids=${ids.toString()}`, { headers })
+}
 
-export const getAvailableGenreSeeds = () => axios.get("https://api.spotify.com/v1/recommendations/available-genre-seeds", { headers })
+export const getAvailableGenreSeeds = () => {
+    return axios.get("https://api.spotify.com/v1/recommendations/available-genre-seeds", { headers })
+}
 
-export const getArtist = () => axios.get("https://api.spotify.com/v1/artists/5XQRfs0gXs30aWUn1Umves", { headers })
+export const getArtist = () => {
+    return axios.get("https://api.spotify.com/v1/artists/5XQRfs0gXs30aWUn1Umves", { headers })
+}
 
-export const getArtistInfoFromIds = (ids: string[]) => axios.get(`https://api.spotify.com/v1/artists?ids=${ids}`, { headers })
+export const getArtistInfoFromIds = (ids: string[]) => {
+    return axios.get(`https://api.spotify.com/v1/artists?ids=${ids}`, { headers })
+}
+
+export const recentArtistRecommendations = (URInums: any) => {
+    return axios.get(`https://api.spotify.com/v1/recommendations?seed_artists=${URInums.slice(0, 5)}&limit=50`, { headers })
+}
+
+export const recentTrackRecommendation = (URInums: any) => {
+    return axios.get(`https://api.spotify.com/v1/recommendations?seed_tracks=${URInums.slice(0, 5)}&limit=50`, { headers })
+}
+
+export const getTopArtistRecommendedTracks = (id: string) => {
+    return axios.get(`https://api.spotify.com/v1/recommendations?seed_artists=${id}&limit=50`, { headers })
+}

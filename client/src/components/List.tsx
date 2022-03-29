@@ -9,7 +9,7 @@ import { StoreContext } from './store';
 
 const List = (props: any) => {
   const [show, setShow] = useState(false)
-  const { playingTrack, setPlayingTrack, playArray, setPlayArray, recentTracks, setRecentTracks, trackName, setTrackName } = useContext(StoreContext)
+  const { playingTrack, setPlayingTrack, playArray, setPlayArray, trackName, setTrackName } = useContext(StoreContext)
   // console.log(props);
   const [hover, setHover] = useState<number | null>()
   const ranges = ["All time", "Last 6 months", "Last 4 weeks"]
@@ -18,10 +18,10 @@ const List = (props: any) => {
     <div className="tracksColumn">
       <div className="headingCont">
         <div className="listHeading">{props.title}</div>
-        {props.setRange ? 
+        {props.setRange ?
           <div className='timeRange'>
             {ranges.map((range, i) => {
-              return <span className={`${i === props.value && "hover"}`} style={{marginLeft:"20px"}}
+              return <span className={`${i === props.value && "hover"}`} style={{ marginLeft: "20px" }}
                 onClick={() => props.setRange(ranges[i])}
               >{ranges[i]}</span>
             })}
@@ -37,7 +37,6 @@ const List = (props: any) => {
           onMouseLeave={() => setHover(null)}
         >
           <img src={song.image} alt="album art" />
-          {/* {(trackName === props.tracks[i].name || hover) && <span className='playIcon'><BsFillPlayFill/></span>} */}
           <span className='playIcon'
             style={{ opacity: (trackName === props.tracks[i].name || hover === i) ? "1" : "0" }}><BsFillPlayFill /></span>
           <div className='nameAndArtist'>

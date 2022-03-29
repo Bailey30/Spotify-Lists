@@ -108,7 +108,7 @@ app.get("/callback", async (req: Request, res: Response) => {
             //gets code from redirect url
             const authGrant = await spotifyApi.authorizationCodeGrant(req.query.code)
             console.log(authGrant);
-            console.log(authGrant);
+
             const access_token = authGrant.body.access_token;
             const refresh_token = authGrant.body.refresh_token;
 

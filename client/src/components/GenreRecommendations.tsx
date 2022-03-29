@@ -14,17 +14,17 @@ const GenreRecommendations = () => {
         // // console.log(seeds);
         
         
-        const data = await getTopTracksLong()
+        // const data = await getTopTracksLong()
         // console.log(data);
-        const artistIds =  getArtistsIdsFromList(data.data.items)
+        // const artistIds =  getArtistsIdsFromList(data.data.items)
         // console.log(artistIds);
-        const artistInfo = await getArtistInfoFromIds(artistIds)
+        // const artistInfo = await getArtistInfoFromIds(artistIds)
         // console.log(artistInfo);
-        const topGenres = getGenresFromArtist(artistInfo.data.artists)
+        // const topGenres = getGenresFromArtist(artistInfo.data.artists)
         // console.log(topGenres);
     }   
     useEffect(()=> {
-        getTopTracksLongGenres()   
+        // getTopTracksLongGenres()   
     },[])
 
   return (

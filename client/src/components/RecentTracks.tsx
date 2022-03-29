@@ -1,40 +1,46 @@
 import { access } from 'fs';
 import React, { useState, useEffect, useContext } from 'react';
-import { getRecentlyPlayed } from '../spotify';
+import { GetAccessToken, getRecentlyPlayed } from '../spotify';
 import { track } from '../types';
 import { StoreContext } from './store';
 import { formatDuration, getTracks, getURIs } from '../utils';
 import List from './List';
 import "../styles/topAndRecent.css"
+import axios from 'axios';
+import { RecentTracksContext } from './recentTracksContext';
 
-interface AppProps {
-    accessToken: string | null
-}
-   
-const RecentTracks = ({ accessToken }: AppProps) => {
-    const {playingTrack,setPlayingTrack, playArray, setPlayArray, recentTracks,setRecentTracks, trackName, setTrackName} = useContext(StoreContext)
+//make a seperate recent tracks context - pass to only relevant components - try to memoize to prevent rerenders
+
+
+const RecentTracks = () => {
+    const { recentTracks, setRecentTracks } = useContext(RecentTracksContext)
+    const { playingTrack, setPlayingTrack, playArray, setPlayArray, trackName, setTrackName } = useContext(StoreContext)
+
 
     useEffect(() => {
-        const trackData = async()=> {
-            const tracks = await getTracks(accessToken)
-            setRecentTracks(tracks!)
-        }
         trackData()
-    }, [accessToken])
+    }, [])
+
+    const trackData = async () => {
+        const tracks = await getTracks()
+        setRecentTracks(tracks!)
+    }
 
     const handlePlayer = (i: number) => {
         setPlayingTrack(i)
-        const uris = getURIs(recentTracks)
+        const uris = getURIs(recentTracks!)
         setPlayArray(uris)
         console.log(recentTracks);
-        setTrackName(recentTracks[i].name)
+        setTrackName(recentTracks![i].name)
     }
 
     return (
         <div className='main'>
-        <List tracks={recentTracks} title={"recently played tracks"} handlePlayer={handlePlayer}/>
+            {recentTracks &&
+                <List tracks={recentTracks} title={"recently played tracks"} handlePlayer={handlePlayer} />
+            }
         </div>
-        
+
     );
 }
 
