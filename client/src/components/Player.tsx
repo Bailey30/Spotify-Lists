@@ -26,7 +26,7 @@ export const Player = () => {
     useEffect(() => {
         setPlay(true);
     }, [playingTrack]);
-
+    console.log(playArray);
     if (!token) return null
     
     return (<div>

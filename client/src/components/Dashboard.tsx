@@ -50,8 +50,8 @@ export default function Dashboard({ access_tokenparam }: AppProps) {
             </Router>
           </div>
         </RecentTracksContextProvider>
-      </StoreProvider>
       <Player />
+      </StoreProvider>
     </div>
   );
 }

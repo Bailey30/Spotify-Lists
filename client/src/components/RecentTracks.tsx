@@ -30,7 +30,8 @@ const RecentTracks = () => {
         setPlayingTrack(i)
         const uris = getURIs(recentTracks!)
         setPlayArray(uris)
-        console.log(recentTracks);
+        // console.log(uris);
+        console.log(playArray);
         setTrackName(recentTracks![i].name)
     }
 
